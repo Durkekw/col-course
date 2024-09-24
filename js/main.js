@@ -22,7 +22,7 @@ const names = [
     'Anna',
 ];
 
-function getRandomPositiveInteger (a, b) {
+function getRandomPositiveInteger(a, b) {
     const lower = Math.ceil(Math.min(Math.abs(a), Math.abs(b)));
     const upper = Math.floor(Math.max(Math.abs(a), Math.abs(b)));
     const result = Math.random() * (upper - lower + 1) + lower;
@@ -30,7 +30,7 @@ function getRandomPositiveInteger (a, b) {
 }
 
 function findRepeat(array, value, start, end){
-    while(1<3){
+    for(let r=0; r<10;){
         if(array.includes(value)){
             value=getRandomPositiveInteger(start,end);
         }else{
