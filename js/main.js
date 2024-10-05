@@ -1,3 +1,7 @@
 import { photoDescription } from "./data.js";
+import { renderPictures } from "./picture.js";
+// import { showBigPicture } from "./big-picture.js";
 
-console.log(photoDescription());
+renderPictures(photoDescription())
+
+// console.log(photoDescription());
