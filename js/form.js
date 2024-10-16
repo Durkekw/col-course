@@ -6,9 +6,7 @@ const cancelBtn = document.querySelector('#upload-cancel');
 const formOverlay = document.querySelector('.img-upload__overlay');
 const body = document.querySelector('body');
 const hashtagField = document.querySelector('.text__hashtags');
-const formComm = document.querySelector('.img-upload__text');
 const test = document.querySelector('#upload-submit');
-const hashes = formComm.querySelector('input');
 const commentField = document.querySelector('.text__description');
 
 
@@ -51,19 +49,18 @@ const pristine = new Pristine(form, {
 });
 
 const validateTags = (value) =>{
+  let counter = 0;
   value = value.toLowerCase();
   const values = value.split(' ');
   const check = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
   const duplicates = values.filter((e, i, a) => a.indexOf(e) !== i);
-  let isValidate = true;
   for(const valid of values){
     if(valid.indexOf('#') === 0 && check.test(valid) && values.length <= 5 && duplicates.length === 0){
-      isValidate = true;
-    }else{
-      isValidate = false;
+      ++counter;
     }
   }
-  return isValidate;
+
+  return counter === values.length;
 };
 
 pristine.addValidator(
