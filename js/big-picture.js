@@ -20,6 +20,11 @@ const hideBigPicture = () => {
   bigPicture.classList.add('hidden');
   document.querySelector('body').classList.remove('modal-open');
   comments.innerHTML = '';
+  document.removeEventListener('keydown', (evt) => {
+    if (evt.key === 'Escape') {
+      hideBigPicture();
+    }
+  });
 };
 
 function onEscKeyDown(obj) {
@@ -49,7 +54,6 @@ const createComments = (dataCom) =>{
 
 const renderComments = (dataComs) =>{
   commentsShown += COMMENTS_PER_PORTION;
-
   if(commentsShown >= dataComs.length){
     commentsLoader.classList.add('hidden');
     commentsShown = dataComs.length;
