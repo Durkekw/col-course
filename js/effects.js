@@ -45,8 +45,8 @@ const EFFECTS = [
   {
     name: 'heat',
     style: 'brightness',
-    min: 3,
-    max: 1,
+    min: 1,
+    max: 3,
     step: 0.1,
     unit: '',
   },
@@ -66,6 +66,8 @@ noUiSlider.create(sliderElement, {
   step: DEFAILT_EFFECT.step,
   connect: 'lower',
 });
+
+sliderElement.classList.add('hidden');
 
 const updateSlider = () =>{
   sliderElement.classList.remove('hidden');
@@ -106,3 +108,5 @@ const onSliderUpdate = () => {
 };
 
 sliderElement.noUiSlider.on('update', onSliderUpdate);
+
+export{chosenEffect};
