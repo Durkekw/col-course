@@ -1,3 +1,5 @@
+import { cancelBtn } from './form.js';
+
 const sliderElement = document.querySelector('.effect-level__slider');
 const form = document.querySelector('.img-upload__form');
 const img = document.querySelector('.img-upload__preview img');
@@ -108,5 +110,13 @@ const onSliderUpdate = () => {
 };
 
 sliderElement.noUiSlider.on('update', onSliderUpdate);
+
+cancelBtn.addEventListener('click', () => {
+  sliderElement.classList.add('hidden');
+  chosenEffect = DEFAILT_EFFECT;
+  img.style.filter = '';
+  img.className = '';
+  effectLevel.value = '';
+});
 
 export{chosenEffect};
