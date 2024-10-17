@@ -60,10 +60,8 @@ const renderComments = (dataComs) =>{
     commentsCounter.textContent = commentsShown;
   }else{
     commentsLoader.classList.remove('hidden');
-    commentsCounter.textContent = COMMENTS_PER_PORTION;
     commentsCounter.textContent = commentsShown;
   }
-
   const fragment = document.createDocumentFragment();
   for (let i = 0; i < commentsShown; i++) {
     const commentElement = createComments(dataComs[i]);

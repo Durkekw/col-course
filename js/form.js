@@ -1,5 +1,3 @@
-
-
 const fileField = document.querySelector('#upload-file');
 const form = document.querySelector('.img-upload__form');
 const cancelBtn = document.querySelector('#upload-cancel');
@@ -39,7 +37,7 @@ cancelBtn.addEventListener('click', () => {
 fileField.addEventListener('change', () => {
   showModal();
 });
-// hashes.removeEventListener('keydown', onEscKey);
+
 
 const pristine = new Pristine(form, {
   classTo: 'img-upload__field-wrapper',
@@ -59,7 +57,6 @@ const validateTags = (value) =>{
       ++counter;
     }
   }
-
   return counter === values.length;
 };
 
