@@ -48,7 +48,7 @@ const createComments = (dataCom) =>{
   comment.querySelector('.social__picture').alt = dataCom.name;
   comment.querySelector('.social__picture').src = dataCom.avatar;
   comment.innerHTML += '<p class="social__text"></p>';
-  comment.querySelector('.social__text').textContent = dataCom.massage;
+  comment.querySelector('.social__text').textContent = dataCom.message;
   return comment;
 };
 

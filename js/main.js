@@ -1,11 +1,20 @@
-import { photoDescription } from './data.js';
 import { renderPictures } from './picture.js';
-import { showForm } from './form.js';
 import { resetScale } from './scale.js';
 import {} from './effects.js';
-// import { showBigPicture } from "./big-picture.js";
+import {getData, sendData} from './api';
+import {setOnFormSubmit, onSendDataSucess, onSendDataError} from './form';
 
-renderPictures(photoDescription());
-showForm();
+const onLoadSuccess = (data) =>{
+  renderPictures(data);
+};
+
+const onLoadFailure = (error) =>{
+  throw new Error(error.message);
+};
+
+getData(onLoadSuccess, onLoadFailure);
+setOnFormSubmit(async (data) => {
+  await sendData(onSendDataSucess,onSendDataError,data);
+});
 resetScale();
-// console.log(photoDescription());
+

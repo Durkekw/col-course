@@ -4,8 +4,9 @@ const cancelBtn = document.querySelector('#upload-cancel');
 const formOverlay = document.querySelector('.img-upload__overlay');
 const body = document.querySelector('body');
 const hashtagField = document.querySelector('.text__hashtags');
-const test = document.querySelector('#upload-submit');
+const submBtn = document.querySelector('#upload-submit');
 const commentField = document.querySelector('.text__description');
+const mes = document.querySelectorAll('.mes');
 
 
 const hideModal = () => {
@@ -31,19 +32,20 @@ function isFieldFocused(){
   return hashtagField === document.activeElement || commentField === document.activeElement;
 }
 
-cancelBtn.addEventListener('click', () => {
-  hideModal();
-});
-fileField.addEventListener('change', () => {
-  showModal();
-});
-
 
 const pristine = new Pristine(form, {
   classTo: 'img-upload__field-wrapper',
   errorTextParent: 'img-upload__field-wrapper',
   errorTextTag: 'p',
   errorTextClass: 'img-upload__field-wrapper--error'
+});
+
+cancelBtn.addEventListener('click', () => {
+  hideModal();
+  pristine.reset();
+});
+fileField.addEventListener('change', () => {
+  showModal();
 });
 
 const validateTags = (value) =>{
@@ -66,17 +68,55 @@ pristine.addValidator(
   'Неправильно заполнены хештеги'
 );
 
-
-const showForm = () => {
-
-  form.addEventListener('click', () =>{
-    pristine.validate();
+const createMessage = (message) => {
+  const mesElem = document.querySelector(`#${message}`).cloneNode(true);
+  const mesBtn = mesElem.querySelector(`.${message}__button`);
+  document.addEventListener('keydown', (evt) => {
+    if (evt.key === 'Escape') {
+      mes.InnerHTML = '';
+    }
   });
+  document.addEventListener('click', () => {
+    if(document.activeElement !== mes) {
+      mes.InnerHTML = '';
+    }
+  });
+  mesBtn.addEventListener('click', () => {
+    mes.InnerHTML = '';
+  });
+  return mes.appendChild(mesElem);
+};
 
-  test.addEventListener('click', (evt) =>{
-    pristine.validate();
+
+const blockSubmitBtn = () => {
+  submBtn.disabled = true;
+  submBtn.textContent = 'Отправляю...';
+};
+const unblockSubmitBtn = () => {
+  submBtn.disabled = false;
+  submBtn.textContent = 'Опубликовать';
+};
+
+const onSendDataSucess = () =>{
+  hideModal();
+  createMessage('success');
+};
+const onSendDataError = () =>{
+  createMessage('error');
+  throw new Error('Возникла ошибка');
+};
+
+const setOnFormSubmit = (cb) =>{
+  form.addEventListener('submit', async (evt) => {
     evt.preventDefault();
+    const isValid = pristine.validate();
+
+    if(isValid){
+      blockSubmitBtn();
+      await cb(new FormData(form));
+      unblockSubmitBtn();
+    }
   });
 };
 
-export{showForm, cancelBtn};
+export{setOnFormSubmit, cancelBtn, onSendDataSucess, onSendDataError};
