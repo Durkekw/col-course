@@ -6,7 +6,7 @@ const body = document.querySelector('body');
 const hashtagField = document.querySelector('.text__hashtags');
 const submBtn = document.querySelector('#upload-submit');
 const commentField = document.querySelector('.text__description');
-const mes = document.querySelectorAll('.mes');
+const mes = document.querySelector('.mes');
 
 
 const hideModal = () => {
@@ -69,7 +69,7 @@ pristine.addValidator(
 );
 
 const createMessage = (message) => {
-  const mesElem = document.querySelector(`#${message}`).cloneNode(true);
+  const mesElem = document.querySelector(`#${message}`).content.cloneNode(true);
   const mesBtn = mesElem.querySelector(`.${message}__button`);
   document.addEventListener('keydown', (evt) => {
     if (evt.key === 'Escape') {
