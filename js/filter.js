@@ -7,6 +7,11 @@ const defaultBtn = document.querySelector('#filter-default');
 const randomBtn = document.querySelector('#filter-random');
 const discussedBtn = document.querySelector('#filter-discussed');
 
+const disableAllBtns = (bool) => {
+  defaultBtn.disabled = bool;
+  randomBtn.disabled = bool;
+  discussedBtn.disabled = bool;
+};
 
 const defaultFilt = (data) =>{
   document.querySelectorAll('.picture').forEach((elem) => elem.remove());
@@ -36,4 +41,4 @@ const discussedFilt = (pictures) =>{
 };
 
 
-export {defaultBtn, defaultFilt, randomBtn, randomFilt, discussedBtn, discussedFilt};
+export {defaultBtn, defaultFilt, randomBtn, randomFilt, discussedBtn, discussedFilt, disableAllBtns};

@@ -3,7 +3,7 @@ import { resetScale } from './scale.js';
 import {} from './effects.js';
 import {getData, sendData} from './api';
 import {setOnFormSubmit, onSendDataSucess, onSendDataError} from './form';
-import {defaultBtn, defaultFilt, randomFilt, randomBtn, discussedFilt, discussedBtn} from './filter';
+import {defaultBtn, defaultFilt, randomFilt, randomBtn, discussedFilt, discussedBtn, disableAllBtns} from './filter';
 
 
 const onLoadSuccess = (data) =>{
@@ -12,8 +12,10 @@ const onLoadSuccess = (data) =>{
     discussedBtn.classList.remove('img-filters__button--active');
     randomBtn.classList.remove('img-filters__button--active');
     defaultBtn.classList.add('img-filters__button--active');
+    disableAllBtns(true);
     setTimeout(() =>{
       defaultFilt(data);
+      disableAllBtns(false);
     },500);
   });
 
@@ -21,17 +23,22 @@ const onLoadSuccess = (data) =>{
     defaultBtn.classList.remove('img-filters__button--active');
     discussedBtn.classList.remove('img-filters__button--active');
     randomBtn.classList.add('img-filters__button--active');
+    disableAllBtns(true);
     setTimeout(() =>{
       randomFilt(data);
+      disableAllBtns(false);
     },500);
   });
   discussedBtn.addEventListener('click', () =>{
     discussedBtn.classList.add('img-filters__button--active');
     defaultBtn.classList.remove('img-filters__button--active');
     randomBtn.classList.remove('img-filters__button--active');
+    disableAllBtns(true);
     setTimeout(() =>{
       discussedFilt(data);
+      disableAllBtns(false);
     },500);
+
   });
   document.querySelector('.img-filters').classList.remove('img-filters--inactive');
 };
