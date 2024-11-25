@@ -9,13 +9,29 @@ import {defaultBtn, defaultFilt, randomFilt, randomBtn, discussedFilt, discussed
 const onLoadSuccess = (data) =>{
   renderPictures(data);
   defaultBtn.addEventListener('click', () =>{
-    defaultFilt(data);
+    discussedBtn.classList.remove('img-filters__button--active');
+    randomBtn.classList.remove('img-filters__button--active');
+    defaultBtn.classList.add('img-filters__button--active');
+    setTimeout(() =>{
+      defaultFilt(data);
+    },500);
   });
+
   randomBtn.addEventListener('click', () =>{
-    randomFilt(data);
+    defaultBtn.classList.remove('img-filters__button--active');
+    discussedBtn.classList.remove('img-filters__button--active');
+    randomBtn.classList.add('img-filters__button--active');
+    setTimeout(() =>{
+      randomFilt(data);
+    },500);
   });
   discussedBtn.addEventListener('click', () =>{
-    discussedFilt(data);
+    discussedBtn.classList.add('img-filters__button--active');
+    defaultBtn.classList.remove('img-filters__button--active');
+    randomBtn.classList.remove('img-filters__button--active');
+    setTimeout(() =>{
+      discussedFilt(data);
+    },500);
   });
   document.querySelector('.img-filters').classList.remove('img-filters--inactive');
 };
