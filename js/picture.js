@@ -22,4 +22,4 @@ const renderPictures = (pictures) => {
   return container.appendChild(listFragment);
 };
 
-export {renderPictures};
+export {createPictureElement,renderPictures};
