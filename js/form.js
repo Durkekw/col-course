@@ -73,20 +73,19 @@ const createMessage = (message) => {
   const mesBtn = mesElem.querySelector(`.${message}__button`);
   document.addEventListener('keydown', (evt) => {
     if (evt.key === 'Escape') {
-      mes.InnerHTML = '';
+      mes.innerHTML = '';
     }
   });
   document.addEventListener('click', () => {
     if(document.activeElement !== mes) {
-      mes.InnerHTML = '';
+      mes.innerHTML = '';
     }
   });
   mesBtn.addEventListener('click', () => {
-    mes.InnerHTML = '';
+    mes.innerHTML = '';
   });
   return mes.appendChild(mesElem);
 };
-
 
 const blockSubmitBtn = () => {
   submBtn.disabled = true;
@@ -103,6 +102,7 @@ const onSendDataSucess = () =>{
 };
 const onSendDataError = () =>{
   createMessage('error');
+  unblockSubmitBtn();
   throw new Error('Возникла ошибка');
 };
 
