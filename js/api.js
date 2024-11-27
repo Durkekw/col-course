@@ -29,6 +29,17 @@ const sendData = async (onSuccess, onFail, body) => {
   }
 };
 
-export {getData,sendData};
+const debounce = (callback, wait) => {
+  let timeoutId = null;
+  return (...args) => {
+    window.clearTimeout(timeoutId);
+    timeoutId = window.setTimeout(() => {
+      callback(...args);
+    }, wait);
+  };
+};
+
+
+export {getData,sendData,debounce};
 
 
